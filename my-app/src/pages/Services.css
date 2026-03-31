@@ -1,0 +1,27 @@
+.product-card { background: white; border-radius: 12px; padding: 36px 28px; box-shadow: var(--shadow); border: 1px solid rgba(25,36,103,0.06); transition: var(--transition); position: relative; overflow: hidden; }
+.product-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--blue); transform:scaleX(0); transform-origin:left; transition:transform .35s ease; }
+.product-card:hover::before { transform:scaleX(1); }
+.product-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-5px); }
+.product-card-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; }
+.product-icon { font-size:2rem; }
+.product-card h3 { color:var(--blue); font-size:1.2rem; margin-bottom:12px; }
+.product-card p  { font-size:0.92rem; color:#555; line-height:1.75; }
+.feature-list    { list-style:none; margin-top:20px; display:flex; flex-direction:column; gap:8px; }
+.feature-list li { display:flex; align-items:center; gap:10px; font-size:0.9rem; color:#444; }
+.check-icon { color:var(--green); font-weight:700; }
+
+.principles-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:24px; }
+.principle-item  { text-align:center; padding:32px 20px; background:white; border-radius:12px; box-shadow:var(--shadow); }
+.principle-icon  { font-size:2.4rem; margin-bottom:14px; }
+.principle-item h4 { color:var(--blue); margin-bottom:8px; }
+.principle-item p  { font-size:0.88rem; color:#555; }
+
+.table-wrap { overflow-x:auto; border-radius:12px; box-shadow:var(--shadow); }
+.comparison-table { width:100%; border-collapse:collapse; }
+.comparison-table th { background:var(--blue); color:white; padding:16px 20px; text-align:left; font-size:0.85rem; letter-spacing:.05em; }
+.comparison-table .planned { opacity:.55; font-weight:400; }
+.comparison-table td { padding:14px 20px; border-bottom:1px solid var(--grey-light); font-size:0.9rem; }
+.comparison-table tr:last-child td { border-bottom:none; }
+.comparison-table tr:nth-child(even) td { background:#f8f9fb; }
+.cscu-col  { color:var(--green); font-weight:600; }
+.bank-bad  { color:var(--red); font-weight:600; }

@@ -1,0 +1,55 @@
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(25,36,103,0.08);
+  transition: box-shadow 0.25s ease;
+}
+.site-nav.scrolled { box-shadow: 0 2px 24px rgba(25,36,103,0.12); }
+
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+}
+
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo-icon {
+  width: 44px; height: 44px; background: var(--blue); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.nav-logo-icon svg { width: 26px; height: 26px; }
+.nav-logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+.nav-logo-text .name { font-size: 0.95rem; font-weight: 700; color: var(--blue); }
+.nav-logo-text .sub  { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey-mid); }
+
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a {
+  padding: 8px 14px; border-radius: 8px; font-size: 0.92rem;
+  font-weight: 500; color: var(--black); transition: var(--transition);
+}
+.nav-links a:hover, .nav-links a.active { color: var(--blue); background: rgba(25,36,103,0.06); }
+
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  padding: 6px; background: none; border: none;
+}
+.nav-hamburger span {
+  display: block; width: 24px; height: 2px; background: var(--black);
+  border-radius: 2px; transition: var(--transition);
+}
+
+.nav-mobile {
+  display: flex; flex-direction: column;
+  padding: 16px 24px 20px; border-top: 1px solid var(--grey-light);
+  background: white;
+}
+.nav-mobile a {
+  padding: 12px 8px; border-bottom: 1px solid var(--grey-light);
+  font-weight: 500; color: var(--black); text-decoration: none;
+}
+.nav-mobile a:last-child { border-bottom: none; color: var(--blue); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+}

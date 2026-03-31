@@ -1,0 +1,41 @@
+.goal-section { max-width: 740px; margin: 0 auto; }
+.goal-section h2 { margin: 8px 0 16px; }
+.goal-section p  { line-height: 1.8; margin-bottom: 24px; }
+.goal-meta { display:flex; justify-content:space-between; font-size:.88rem; color:#555; margin-bottom:8px; }
+.goal-meta strong { color:var(--blue); }
+.goal-bar-wrap { background:var(--grey-light); border-radius:100px; height:12px; overflow:hidden; }
+.goal-bar { background:linear-gradient(90deg,var(--blue),var(--green)); height:100%; border-radius:100px; transition:width 1.5s ease; }
+.goal-labels { display:flex; justify-content:space-between; font-size:.82rem; color:var(--grey-mid); margin-top:8px; }
+
+.fund-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
+.fund-item { background:white; border-radius:12px; padding:28px 20px; box-shadow:var(--shadow); text-align:center; }
+.fund-pct  { font-size:2rem; font-weight:800; margin-bottom:8px; }
+.fund-pct.blue   { color:var(--blue); }
+.fund-pct.red    { color:var(--red); }
+.fund-pct.yellow { color:#a07000; }
+.fund-pct.green  { color:var(--green); }
+.fund-lbl { font-size:.88rem; color:#555; }
+
+.cta-card { background:var(--blue); color:white; border-radius:12px; padding:40px 32px; text-align:center; display:flex; flex-direction:column; gap:12px; }
+.cta-card.dark { background:var(--grey-dark); }
+.cta-card h3 { color:white; margin-bottom:4px; }
+.cta-card p  { color:rgba(255,255,255,0.72); margin-bottom:8px; }
+
+.pledge-card { text-align:center; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.pledge-icon { font-size:2.4rem; }
+.pledge-card h3 { color:var(--blue); }
+
+.donor-tier { margin-bottom:32px; }
+.tier-title { font-size:1rem; margin-bottom:14px; }
+.tier-title.gold   { color:#a07000; }
+.tier-title.silver { color:#6b7280; }
+.tier-title.green  { color:var(--green); }
+.donor-list { display:flex; flex-wrap:wrap; gap:10px; }
+.donor-chip { background:white; border:1px solid var(--grey-light); border-radius:100px; padding:8px 18px; font-size:.88rem; font-weight:500; box-shadow:0 1px 6px rgba(0,0,0,0.05); }
+.donor-chip.gold { border-color:#d4a800; background:#fffce8; font-weight:600; }
+.donor-chip.your-name { border-style:dashed; color:var(--grey-mid); }
+
+.merch-card { background:linear-gradient(135deg,#f8f9fb,#eff1f8); border-radius:16px; padding:44px 32px; text-align:center; border:1px solid rgba(25,36,103,0.06); }
+.merch-icon { font-size:2.4rem; margin-bottom:12px; }
+.merch-card h3 { color:var(--blue); margin-bottom:10px; }
+.merch-card p  { max-width:480px; margin:0 auto 24px; color:#555; }

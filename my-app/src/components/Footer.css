@@ -1,0 +1,42 @@
+.site-footer { background: var(--black); color: var(--white); padding: 64px 0 32px; }
+
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px;
+  padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.footer-brand .logo-wrap { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+.footer-brand .logo-icon { width:40px; height:40px; background:var(--blue); border-radius:8px; display:flex; align-items:center; justify-content:center; }
+.footer-brand .logo-icon svg { width:24px; height:24px; }
+.footer-brand .logo-name { font-weight:700; font-size:0.95rem; }
+.footer-brand p { font-size:0.88rem; color:rgba(255,255,255,0.55); line-height:1.7; max-width:280px; }
+.footer-brand .tagline { font-size:0.75rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-top:20px; }
+
+.footer-col h5 { font-size:0.78rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:16px; }
+.footer-col a  { display:block; font-size:0.9rem; color:rgba(255,255,255,0.7); padding:4px 0; transition:var(--transition); }
+.footer-col a:hover { color: var(--white); }
+
+.footer-contact p      { font-size:0.88rem; color:rgba(255,255,255,0.6); }
+.footer-contact strong { color:rgba(255,255,255,0.8); }
+.merch-note { font-size:0.8rem !important; color:rgba(255,255,255,0.4) !important; margin-top:10px; }
+.merch-note a { color:rgba(255,255,255,0.55); display:inline !important; padding:0 !important; }
+
+.footer-social { display:flex; gap:12px; margin-top:20px; }
+.footer-social a {
+  width:40px; height:40px; border-radius:10px;
+  border:1px solid rgba(255,255,255,0.15);
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,0.6); transition:var(--transition);
+}
+.footer-social a:hover { background:var(--blue); border-color:var(--blue); color:var(--white); }
+
+.footer-bottom {
+  display:flex; align-items:center; justify-content:space-between;
+  padding-top:32px; font-size:0.82rem; color:rgba(255,255,255,0.3);
+}
+
+@media (max-width:768px) {
+  .footer-grid { grid-template-columns:1fr 1fr; }
+  .footer-brand { grid-column:1/-1; }
+  .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
+}
+@media (max-width:480px) { .footer-grid { grid-template-columns:1fr; } }
