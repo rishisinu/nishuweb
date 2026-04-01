@@ -23,6 +23,16 @@
 
 html { scroll-behavior: smooth; }
 body { font-family: var(--font); color: var(--black); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(25,36,103,0.06), transparent 34%),
+    radial-gradient(circle at 95% 15%, rgba(46,133,85,0.05), transparent 28%);
+}
 img  { max-width: 100%; display: block; }
 a    { text-decoration: none; color: inherit; }
 ul   { list-style: none; }
@@ -51,11 +61,11 @@ p  { color: #3a3a3a; }
 }
 .btn-primary { background: var(--blue); color: var(--white); border-color: var(--blue); }
 .btn-primary:hover { background: var(--blue-mid); border-color: var(--blue-mid); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-.btn-outline { background: transparent; color: var(--blue); border-color: var(--blue); }
+.btn-outline { background: rgba(255,255,255,0.52); color: var(--blue); border-color: rgba(25,36,103,0.62); backdrop-filter: blur(8px); }
 .btn-outline:hover { background: var(--blue); color: var(--white); transform: translateY(-2px); }
 .btn-outline-white { background: transparent; color: var(--white); border-color: var(--white); }
 .btn-outline-white:hover { background: var(--white); color: var(--blue); }
-.btn-accent { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+.btn-accent { background: linear-gradient(135deg, #f2a008, #f4b637); color: var(--black); border-color: #f4b637; }
 .btn-accent:hover { background: #d98e07; border-color: #d98e07; transform: translateY(-2px); }
 
 /* ── Section Label ── */
@@ -63,21 +73,25 @@ p  { color: #3a3a3a; }
   display: inline-block; background: rgba(25,36,103,0.08); color: var(--blue);
   padding: 6px 16px; border-radius: 100px; font-size: 0.75rem;
   font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 18px;
+  border: 1px solid rgba(25,36,103,0.12);
+  backdrop-filter: blur(5px);
 }
 .section-label.light { background: rgba(255,255,255,0.15); color: var(--white); }
 
 /* ── Cards ── */
 .card {
-  background: var(--white); border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(248,250,255,0.92)); border-radius: var(--radius);
   box-shadow: var(--shadow); padding: 32px; transition: var(--transition);
-  border: 1px solid rgba(25,36,103,0.06);
+  border: 1px solid rgba(25,36,103,0.09);
+  backdrop-filter: blur(8px);
 }
 .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
 
 .card-person {
-  background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow);
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(248,250,255,0.92)); border-radius: var(--radius); box-shadow: var(--shadow);
   padding: 28px 20px; text-align: center; transition: var(--transition);
-  border: 1px solid rgba(25,36,103,0.06);
+  border: 1px solid rgba(25,36,103,0.09);
+  backdrop-filter: blur(8px);
 }
 .card-person:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
 

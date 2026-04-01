@@ -63,13 +63,11 @@
   width: 66px; height: 66px; border-radius: 50%;
   background: rgba(25,36,103,0.1); color: var(--blue);
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; font-weight: 700; margin: -42px auto 12px;
+  font-size: 1.2rem; font-weight: 700; margin: 10px auto 12px;
   border: 3px solid white;
   box-shadow: 0 8px 20px rgba(25,36,103,0.16);
-  position: relative;
-  z-index: 2;
 }
-.card-person h4   { color: var(--blue); margin-bottom: 4px; font-size: 0.94rem; }
+.card-person h4   { color: var(--blue); margin: 4px 0; font-size: 0.94rem; }
 .card-person .role { font-size: 0.75rem; color: var(--grey-mid); font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
 .card-person p     { font-size: 0.8rem; color: #50596a; line-height: 1.55; }
 
