@@ -21,21 +21,193 @@
 .cta-card h3 { color:white; margin-bottom:4px; }
 .cta-card p  { color:rgba(255,255,255,0.72); margin-bottom:8px; }
 
+.sponsors-ticker {
+  border-radius: 14px;
+  border: 1px solid rgba(25,36,103,0.12);
+  overflow: hidden;
+  background: linear-gradient(180deg, #ffffff, #f8f9fb);
+}
+.sponsors-track {
+  width: max-content;
+  display: flex;
+  gap: 12px;
+  padding: 14px 10px;
+  animation: sponsors-slide 34s linear infinite;
+}
+.sponsors-ticker:hover .sponsors-track { animation-play-state: paused; }
+.sponsor-pill {
+  background: white;
+  border: 1px solid rgba(25,36,103,0.12);
+  box-shadow: 0 4px 14px rgba(25,36,103,0.08);
+  border-radius: 999px;
+  padding: 10px 18px;
+  white-space: nowrap;
+  color: var(--blue);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+@keyframes sponsors-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 .pledge-card { text-align:center; display:flex; flex-direction:column; align-items:center; gap:12px; }
-.pledge-icon { font-size:2.4rem; }
+.pledge-icon {
+  width:56px; height:56px; border-radius:12px; background:rgba(25,36,103,0.1); color:var(--blue);
+  display:flex; align-items:center; justify-content:center; font-size:0.95rem; font-weight:800; letter-spacing:.03em;
+}
 .pledge-card h3 { color:var(--blue); }
 
-.donor-tier { margin-bottom:32px; }
+.tier-filter { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:0 auto 24px; max-width:860px; }
+.tier-filter button {
+  border:1px solid rgba(25,36,103,0.2); background:white; color:var(--blue);
+  border-radius:100px; padding:8px 16px; font-size:0.84rem; font-weight:600; cursor:pointer; transition:var(--transition);
+}
+.tier-filter button:hover { border-color:var(--blue); transform:translateY(-1px); }
+.tier-filter button.active { background:var(--blue); color:white; border-color:var(--blue); }
+
+.donor-wall-shell {
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid rgba(25,36,103,0.1);
+  background: radial-gradient(circle at top right, rgba(25,36,103,0.06), rgba(255,255,255,0.94) 45%);
+  padding: 30px 24px;
+  box-shadow: 0 14px 32px rgba(25,36,103,0.1);
+}
+.donor-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.proof-chip {
+  background: white;
+  border: 1px solid rgba(25,36,103,0.12);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+.proof-chip strong {
+  display: block;
+  color: var(--blue);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+.proof-chip span {
+  display: block;
+  margin-top: 4px;
+  color: #5f6778;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.donor-tier { margin-bottom:16px; }
+.tier-card {
+  border-radius: 14px;
+  border: 1px solid rgba(25,36,103,0.12);
+  background: white;
+  padding: 16px;
+}
+.tier-card.gold { box-shadow: inset 0 0 0 1px rgba(210,160,35,0.22); }
+.tier-card.silver { box-shadow: inset 0 0 0 1px rgba(113,121,139,0.18); }
+.tier-card.green { box-shadow: inset 0 0 0 1px rgba(46,133,85,0.2); }
 .tier-title { font-size:1rem; margin-bottom:14px; }
 .tier-title.gold   { color:#a07000; }
 .tier-title.silver { color:#6b7280; }
 .tier-title.green  { color:var(--green); }
 .donor-list { display:flex; flex-wrap:wrap; gap:10px; }
-.donor-chip { background:white; border:1px solid var(--grey-light); border-radius:100px; padding:8px 18px; font-size:.88rem; font-weight:500; box-shadow:0 1px 6px rgba(0,0,0,0.05); }
-.donor-chip.gold { border-color:#d4a800; background:#fffce8; font-weight:600; }
-.donor-chip.your-name { border-style:dashed; color:var(--grey-mid); }
+.donor-chip {
+  background: white;
+  border: 1px solid var(--grey-light);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: .88rem;
+  font-weight: 600;
+  color: #26314a;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.donor-chip.gold { border-color:#d4a800; background:#fff8df; color:#7c5b00; }
+.donor-chip.your-name {
+  border-style:dashed;
+  color:var(--grey-mid);
+  background: rgba(25,36,103,0.03);
+}
 
-.merch-card { background:linear-gradient(135deg,#f8f9fb,#eff1f8); border-radius:16px; padding:44px 32px; text-align:center; border:1px solid rgba(25,36,103,0.06); }
-.merch-icon { font-size:2.4rem; margin-bottom:12px; }
-.merch-card h3 { color:var(--blue); margin-bottom:10px; }
-.merch-card p  { max-width:480px; margin:0 auto 24px; color:#555; }
+.donor-cta {
+  margin-top: 22px;
+  border-radius: 14px;
+  background: linear-gradient(125deg, var(--blue), #24368d);
+  color: white;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 1.2fr auto;
+  gap: 18px;
+  align-items: center;
+}
+.donor-cta-kicker {
+  color: rgba(255,255,255,0.74);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  margin-bottom: 8px;
+}
+.donor-cta h3 {
+  color: white;
+  font-size: 1.24rem;
+  margin-bottom: 8px;
+}
+.donor-cta p {
+  color: rgba(255,255,255,0.82);
+  max-width: 620px;
+}
+.donor-cta-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.donor-cta-actions .btn-outline {
+  border-color: rgba(255,255,255,0.52);
+  color: white;
+}
+.donor-cta-actions .btn-outline:hover {
+  background: white;
+  color: var(--blue);
+}
+
+.merch-card { background:linear-gradient(135deg,#f8f9fb,#eff1f8); border-radius:16px; padding:44px 32px; border:1px solid rgba(25,36,103,0.06); }
+.merch-feature {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 26px;
+  align-items: center;
+}
+.merch-feature-copy h3 { color: var(--blue); margin-bottom: 12px; max-width: 540px; }
+.merch-feature-copy p { color: #4b5563; line-height: 1.75; max-width: 560px; }
+.merch-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+.merch-contact { font-size: 0.86rem; margin-top: 12px; color: #64748b; }
+.merch-contact a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.merch-gallery { display:grid; grid-template-columns:1fr; gap:12px; }
+.merch-tile {
+  background: white;
+  border: 1px solid rgba(25,36,103,0.12);
+  border-radius: 12px;
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 16px rgba(25,36,103,0.08);
+}
+
+@media (max-width: 820px) {
+  .merch-feature { grid-template-columns: 1fr; }
+  .donor-proof { grid-template-columns: 1fr; }
+  .donor-cta { grid-template-columns: 1fr; }
+  .donor-cta-actions { justify-content: flex-start; }
+}

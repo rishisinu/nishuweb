@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './Navbar.css';
 
@@ -14,6 +14,7 @@ const LogoIcon = () => (
 );
 
 export default function Navbar() {
+  const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -22,6 +23,10 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   const links = [
     { to: '/',          label: 'Home' },
@@ -53,7 +58,7 @@ export default function Navbar() {
         </ul>
 
         <div className="nav-cta">
-          <a href="mailto:neil06@unc.edu" className="btn btn-outline">Contact Us</a>
+          <a href="#contact" className="btn nav-contact-btn">Contact Us</a>
         </div>
 
         <button
@@ -72,9 +77,9 @@ export default function Navbar() {
       {open && (
         <div className="nav-mobile" role="menu">
           {links.map(l => (
-            <NavLink key={l.to} to={l.to} end={l.to === '/'} onClick={() => setOpen(false)}>{l.label}</NavLink>
+            <NavLink key={l.to} to={l.to} end={l.to === '/'}>{l.label}</NavLink>
           ))}
-          <a href="mailto:neil06@unc.edu" onClick={() => setOpen(false)}>Contact Us</a>
+          <a href="#contact">Contact Us</a>
         </div>
       )}
     </nav>

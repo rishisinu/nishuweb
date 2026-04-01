@@ -26,7 +26,7 @@ const LinkedInIcon = () => (
 
 export default function Footer() {
   return (
-    <footer className="site-footer" role="contentinfo">
+    <footer className="site-footer" role="contentinfo" id="contact">
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
@@ -52,17 +52,16 @@ export default function Footer() {
             <Link to="/literacy">Workshops</Link>
             <Link to="/support">Donate</Link>
             <Link to="/support#pledge">Pledge Form</Link>
-            <a href="mailto:cjjustus@unc.edu">Merch</a>
+            <Link to="/support#merch">Merch Shop</Link>
           </div>
 
           <div className="footer-col footer-contact">
             <h5>Contact</h5>
             <p><strong>Neil Joshi</strong> — CGO<br /><a href="mailto:neil06@unc.edu">neil06@unc.edu</a></p>
             <p style={{ marginTop: 10 }}><strong>Mohammad Qureshi</strong> — CSO<br /><a href="mailto:maq@unc.edu">maq@unc.edu</a></p>
-            <p className="merch-note">Merch: <a href="mailto:cjjustus@unc.edu">cjjustus@unc.edu</a></p>
             <div className="footer-social">
-              <a href="#" aria-label="Instagram"><InstagramIcon /></a>
-              <a href="#" aria-label="LinkedIn"><LinkedInIcon /></a>
+              <a href="https://www.instagram.com/carolinacreditunion/?igsh=MThqNnJ4d3VudGVpOA%3D%3D&utm_source=qr" target="_blank" rel="noreferrer" aria-label="Instagram"><InstagramIcon /></a>
+              <a href="https://www.linkedin.com/company/carolina-credit-union-initiative/posts/?feedView=all" target="_blank" rel="noreferrer" aria-label="LinkedIn"><LinkedInIcon /></a>
             </div>
           </div>
         </div>

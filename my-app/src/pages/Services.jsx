@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Services.css';
 
 function Reveal({ children, className = '' }) {
@@ -13,47 +13,50 @@ function Reveal({ children, className = '' }) {
 
 const SERVICES = [
   {
-    icon: '🏦', id: 'credit-builder', title: 'Credit Builder Loan',
+    badge: 'CB', id: 'credit-builder', title: 'Credit Builder Loan',
     desc: 'Start building your credit history today. Our small-dollar Credit Builder Loans are designed specifically for students with little or no credit history. With fixed, transparent terms and low interest, you make manageable monthly payments while establishing the credit foundation you need for life after college.',
     features: ['Small-dollar loan amounts', 'Fixed, transparent terms', 'Reports to major credit bureaus', 'No penalty for early payoff'],
   },
   {
-    icon: '💳', id: 'checking', title: 'Checking & Savings Accounts',
+    badge: 'CS', id: 'checking', title: 'Checking & Savings Accounts',
     desc: 'Simple, no-fee accounts with the features students actually need. Our checking account comes with free ATM access, online statements, and zero minimum balance requirements. Pair it with a savings account to start building your financial future with ease.',
     features: ['No monthly maintenance fees', 'Free ATM access', 'Online/mobile statements', 'No minimum balance'],
   },
   {
-    icon: '📱', id: 'digital', title: 'Digital Banking',
+    badge: 'DB', id: 'digital', title: 'Digital Banking',
     desc: 'Manage your money anytime, anywhere. Our secure mobile and online banking platform lets you check balances, transfer funds, pay bills, and track your budget — all from your phone. Built for the digital-first generation.',
     features: ['24/7 account access', 'Instant transfers', 'Budget tracking tools', 'Bank-grade encryption'],
   },
   {
-    icon: '🔒', id: 'debit', title: 'Debit Cards',
+    badge: 'DC', id: 'debit', title: 'Debit Cards',
     desc: 'Spend safely with CSCU debit cards issued through trusted partner networks. Real-time fraud monitoring and instant alerts keep your money protected — whether you\'re buying textbooks on Franklin Street or ordering late-night food before finals.',
     features: ['Real-time fraud monitoring', 'Issued via partner networks', 'Instant transaction alerts', 'Card freeze in-app'],
   },
 ];
 
 const PRINCIPLES = [
-  { icon: '🤝', title: 'Member-Owned', desc: 'Unlike banks, credit unions are owned by their members. Every CSCU member has an equal voice.' },
-  { icon: '💡', title: 'Transparent', desc: 'No hidden fees, no fine print. Every term and condition is written in plain language.' },
-  { icon: '⚖️', title: 'Ethical', desc: 'We operate in the best interest of students — not shareholders or executives.' },
-  { icon: '📚', title: 'Educational', desc: 'Banking paired with financial literacy. We teach, not just transact.' },
-  { icon: '🎓', title: 'Student-Led', desc: 'Governed by Carolina students, for Carolina students. Real leadership experience.' },
+  { badge: 'MO', title: 'Member-Owned', desc: 'Unlike banks, credit unions are owned by their members. Every CSCU member has an equal voice.' },
+  { badge: 'TR', title: 'Transparent', desc: 'No hidden fees, no fine print. Every term and condition is written in plain language.' },
+  { badge: 'ET', title: 'Ethical', desc: 'We operate in the best interest of students — not shareholders or executives.' },
+  { badge: 'ED', title: 'Educational', desc: 'Banking paired with financial literacy. We teach, not just transact.' },
+  { badge: 'SL', title: 'Student-Led', desc: 'Governed by Carolina students, for Carolina students. Real leadership experience.' },
 ];
 
 const COMPARE = [
-  { feature: 'Monthly fees', cscu: '✓ None', bank: '✗ Up to $15/month', bankBad: true },
-  { feature: 'Minimum balance requirement', cscu: '✓ None', bank: '✗ Often $1,500+', bankBad: true },
-  { feature: 'Credit builder products', cscu: '✓ Yes', bank: 'Rarely for students', bankBad: false },
-  { feature: 'Student ownership / governance', cscu: '✓ Member-owned', bank: '✗ Shareholder-owned', bankBad: true },
-  { feature: 'Financial education', cscu: '✓ Integrated', bank: 'Minimal', bankBad: false },
-  { feature: '24/7 digital access', cscu: '✓ Yes', bank: '✓ Yes', bankBad: false },
-  { feature: 'Fraud monitoring', cscu: '✓ Yes', bank: '✓ Yes', bankBad: false },
-  { feature: 'Profits returned to members', cscu: '✓ Yes', bank: '✗ No', bankBad: true },
+  { feature: 'Monthly fees', cscu: 'None', bank: 'Up to $15/month', bankBad: true },
+  { feature: 'Minimum balance requirement', cscu: 'None', bank: 'Often $1,500+', bankBad: true },
+  { feature: 'Credit builder products', cscu: 'Yes', bank: 'Rarely for students', bankBad: false },
+  { feature: 'Student ownership / governance', cscu: 'Member-owned', bank: 'Shareholder-owned', bankBad: true },
+  { feature: 'Financial education', cscu: 'Integrated', bank: 'Minimal', bankBad: false },
+  { feature: '24/7 digital access', cscu: 'Yes', bank: 'Yes', bankBad: false },
+  { feature: 'Fraud monitoring', cscu: 'Yes', bank: 'Yes', bankBad: false },
+  { feature: 'Profits returned to members', cscu: 'Yes', bank: 'No', bankBad: true },
 ];
 
 export default function Services() {
+  const [activeServiceId, setActiveServiceId] = useState(SERVICES[0].id);
+  const activeService = SERVICES.find((service) => service.id === activeServiceId) || SERVICES[0];
+
   return (
     <>
       <section className="page-hero">
@@ -72,12 +75,32 @@ export default function Services() {
             <h2>Core Financial Products</h2>
             <p style={{ maxWidth: 540, margin: '12px auto 0' }}>Designed with student life in mind.</p>
           </div></Reveal>
+          <Reveal>
+            <div className="service-toggle" role="tablist" aria-label="Select a product to highlight">
+              {SERVICES.map((service) => (
+                <button
+                  key={service.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeServiceId === service.id}
+                  className={activeServiceId === service.id ? 'active' : ''}
+                  onClick={() => setActiveServiceId(service.id)}
+                >
+                  {service.title}
+                </button>
+              ))}
+            </div>
+          </Reveal>
           <div className="grid-2">
             {SERVICES.map(s => (
               <Reveal key={s.id}>
-                <div className="product-card" id={s.id}>
+                <div
+                  className={`product-card ${activeServiceId === s.id ? 'active' : ''}`}
+                  id={s.id}
+                  onMouseEnter={() => setActiveServiceId(s.id)}
+                >
                   <div className="product-card-top">
-                    <div className="product-icon">{s.icon}</div>
+                    <div className="product-icon">{s.badge}</div>
                     <span className="badge badge-blue">Available Soon</span>
                   </div>
                   <h3>{s.title}</h3>
@@ -89,6 +112,13 @@ export default function Services() {
               </Reveal>
             ))}
           </div>
+          <Reveal>
+            <div className="service-focus-panel">
+              <p className="focus-label">Focused Product</p>
+              <h3>{activeService.title}</h3>
+              <p>{activeService.desc}</p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -105,7 +135,7 @@ export default function Services() {
             {PRINCIPLES.map(p => (
               <Reveal key={p.title}>
                 <div className="principle-item">
-                  <div className="principle-icon">{p.icon}</div>
+                  <div className="principle-icon">{p.badge}</div>
                   <h4>{p.title}</h4>
                   <p>{p.desc}</p>
                 </div>

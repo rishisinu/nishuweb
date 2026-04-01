@@ -12,7 +12,7 @@
 }
 .hero-content {
   position: relative; z-index: 2;
-  max-width: 860px; margin: 0 auto; padding: 72px 24px 0;
+  max-width: 860px; margin: 0 auto; padding: 72px 24px 96px;
   text-align: center; color: white;
 }
 .hero-badge {
@@ -41,13 +41,24 @@
   position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
   z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
   color: rgba(255,255,255,0.4); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  background: transparent; border: none; cursor: pointer;
+  font-family: var(--font);
+  transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s ease;
 }
 .arrow {
   width: 32px; height: 32px; border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;
   animation: bounce 2s infinite;
 }
+.hero-scroll:hover { color: rgba(255,255,255,0.8); }
+.hero-scroll:hover .arrow { border-color: rgba(255,255,255,0.5); }
+.hero-scroll.hidden { opacity: 0; pointer-events: none; transform: translate(-50%, 14px); }
 @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+@media (max-width: 780px), (max-height: 820px) {
+  .hero-content { padding-bottom: 44px; }
+  .hero-scroll { display: none; }
+}
 
 /* ── Stat Ribbon ── */
 .stat-ribbon { background: var(--blue); color: white; padding: 40px 0; }
@@ -87,6 +98,11 @@
 .service-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--blue); border-radius:12px 12px 0 0; transform:scaleX(0); transform-origin:left; transition:transform .35s ease; }
 .service-card:hover::before { transform:scaleX(1); }
 .service-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-5px); }
-.service-icon { font-size: 1.8rem; margin-bottom: 16px; }
+.service-icon {
+  width: 52px; height: 52px; border-radius: 12px; margin-bottom: 16px;
+  background: rgba(25,36,103,0.1); color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.95rem; font-weight: 800; letter-spacing: 0.03em;
+}
 .service-card h3 { color: var(--blue); margin-bottom: 10px; font-size: 1.15rem; }
 .service-card p  { font-size: 0.9rem; color: #555; line-height: 1.7; }

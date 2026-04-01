@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Home.css';
 
 function RevealSection({ children, className = '' }) {
@@ -37,6 +37,25 @@ function StatItem({ value, label, prefix = '', suffix = '' }) {
 }
 
 export default function Home() {
+  const [showScrollCue, setShowScrollCue] = useState(true);
+
+  useEffect(() => {
+    const onScroll = () => setShowScrollCue(window.scrollY < 60);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const handleHeroScroll = () => {
+    const mission = document.getElementById('mission');
+    if (!mission) return;
+    const nav = document.getElementById('site-nav');
+    const navHeight = nav?.offsetHeight || 0;
+    const targetTop = mission.getBoundingClientRect().top + window.scrollY - navHeight - 36;
+    window.scrollTo({ top: targetTop, behavior: 'smooth' });
+    setShowScrollCue(false);
+  };
+
   return (
     <>
       {/* HERO */}
@@ -59,14 +78,19 @@ export default function Home() {
             <Link to="/support" className="btn btn-accent">Support Our Mission</Link>
           </div>
         </div>
-        <div className="hero-scroll" aria-hidden="true">
+        <button
+          type="button"
+          className={`hero-scroll ${showScrollCue ? '' : 'hidden'}`}
+          onClick={handleHeroScroll}
+          aria-label="Scroll to mission section"
+        >
           <span>Scroll</span>
           <div className="arrow">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M6 1v10M1 7l5 5 5-5" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
-        </div>
+        </button>
       </section>
 
       {/* STAT RIBBON */}
@@ -166,13 +190,13 @@ export default function Home() {
           </RevealSection>
           <div className="grid-4">
             {[
-              { icon: '🏦', title: 'Credit Builder', desc: 'Small-dollar loans to establish or improve your credit history with clear, fixed terms.' },
-              { icon: '💳', title: 'Checking & Savings', desc: 'Simple, no-fee accounts with ATM access and easy online statements.' },
-              { icon: '📱', title: 'Digital Banking', desc: '24/7 secure mobile tools for transfers, budgeting, and financial tracking.' },
-              { icon: '🔒', title: 'Debit Cards', desc: 'Secure cards with fraud monitoring, issued through trusted partner networks.' },
+              { badge: 'CB', title: 'Credit Builder', desc: 'Small-dollar loans to establish or improve your credit history with clear, fixed terms.' },
+              { badge: 'CS', title: 'Checking & Savings', desc: 'Simple, no-fee accounts with ATM access and easy online statements.' },
+              { badge: 'DB', title: 'Digital Banking', desc: '24/7 secure mobile tools for transfers, budgeting, and financial tracking.' },
+              { badge: 'DC', title: 'Debit Cards', desc: 'Secure cards with fraud monitoring, issued through trusted partner networks.' },
             ].map(s => (
               <RevealSection key={s.title} className="service-card">
-                <div className="service-icon">{s.icon}</div>
+                <div className="service-icon">{s.badge}</div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
               </RevealSection>

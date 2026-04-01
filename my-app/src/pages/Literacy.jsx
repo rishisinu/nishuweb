@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Literacy.css';
 
 function Reveal({ children, className = '' }) {
@@ -12,13 +12,17 @@ function Reveal({ children, className = '' }) {
 }
 
 const WORKSHOPS = [
-  { icon: '📊', title: 'Budgeting', desc: 'Learn to track your spending, set realistic goals, and build habits that work with a student lifestyle and income.' },
-  { icon: '💳', title: 'Understanding Credit', desc: 'Demystify credit scores, credit reports, and how to build a strong credit profile starting now — even as a student.' },
-  { icon: '📈', title: 'Investing', desc: 'An approachable introduction to investing: index funds, compound interest, and how to start building wealth in your 20s.' },
-  { icon: '🎓', title: 'Student Loan & Debt Management', desc: 'Navigate federal loans, repayment options, and smart debt management strategies for life after graduation.' },
+  { badge: 'BD', title: 'Budgeting', desc: 'Learn to track your spending, set realistic goals, and build habits that work with a student lifestyle and income.' },
+  { badge: 'CR', title: 'Understanding Credit', desc: 'Demystify credit scores, credit reports, and how to build a strong credit profile starting now — even as a student.' },
+  { badge: 'IN', title: 'Investing', desc: 'An approachable introduction to investing: index funds, compound interest, and how to start building wealth in your 20s.' },
+  { badge: 'SL', title: 'Student Loan & Debt Management', desc: 'Navigate federal loans, repayment options, and smart debt management strategies for life after graduation.' },
 ];
 
 export default function Literacy() {
+  const [activeWorkshopTitle, setActiveWorkshopTitle] = useState(WORKSHOPS[0].title);
+  const [showEventDetails, setShowEventDetails] = useState(true);
+  const activeWorkshop = WORKSHOPS.find((workshop) => workshop.title === activeWorkshopTitle) || WORKSHOPS[0];
+
   return (
     <>
       <section className="page-hero">
@@ -37,17 +41,45 @@ export default function Literacy() {
             <h2>What We Offer</h2>
             <p style={{ maxWidth: 560, margin: '12px auto 0' }}>Our curriculum is designed to meet students where they are — from financial basics to advanced wealth-building strategies.</p>
           </div></Reveal>
+          <Reveal>
+            <div className="workshop-tabs" role="tablist" aria-label="Workshop categories">
+              {WORKSHOPS.map((workshop) => (
+                <button
+                  key={workshop.title}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeWorkshopTitle === workshop.title}
+                  className={activeWorkshopTitle === workshop.title ? 'active' : ''}
+                  onClick={() => setActiveWorkshopTitle(workshop.title)}
+                >
+                  {workshop.title}
+                </button>
+              ))}
+            </div>
+          </Reveal>
           <div className="grid-4">
             {WORKSHOPS.map(w => (
               <Reveal key={w.title}>
-                <div className="workshop-card">
-                  <div className="workshop-icon">{w.icon}</div>
+                <div
+                  className={`workshop-card ${activeWorkshopTitle === w.title ? 'active' : ''}`}
+                  tabIndex={0}
+                  onMouseEnter={() => setActiveWorkshopTitle(w.title)}
+                  onFocus={() => setActiveWorkshopTitle(w.title)}
+                >
+                  <div className="workshop-icon">{w.badge}</div>
                   <h3>{w.title}</h3>
                   <p>{w.desc}</p>
                 </div>
               </Reveal>
             ))}
           </div>
+          <Reveal>
+            <div className="workshop-detail">
+              <p className="workshop-detail-label">Featured Topic</p>
+              <h3>{activeWorkshop.title}</h3>
+              <p>{activeWorkshop.desc}</p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -64,18 +96,37 @@ export default function Literacy() {
             <div className="symposium-card">
               <div className="sym-inner">
                 <div className="sym-badges">
-                  <span className="upcoming-badge">🗓️ Upcoming Event</span>
-                  <span className="date-chip">April 11, 2026</span>
+                  <span className="upcoming-badge">Upcoming Event</span>
+                  <span className="date-chip">April 11, 2026 | The Friday Center</span>
                 </div>
-                <h2>Financial Literacy Symposium</h2>
-                <p>Join us for CSCU's flagship educational event — an immersive afternoon of workshops, games, and keynote insights on personal finance, credit, and wealth-building for Carolina students.</p>
-                <div className="sym-features">
-                  {['🎤 Keynote: Seth Trimble', '🔐 Escape Room Experience', '🃏 Interactive Credit Games', '📱 Live Financial Workshops', '🤝 Networking'].map(f => (
-                    <div key={f} className="sym-feature">{f}</div>
-                  ))}
-                </div>
-                <div style={{ marginTop: 32 }}>
-                  <a href="mailto:neil06@unc.edu?subject=Symposium RSVP" className="btn btn-outline-white">RSVP / Learn More</a>
+                <div className="sym-grid">
+                  <div>
+                    <h2>Financial Literacy Symposium</h2>
+                    <p>Our flagship spring event brings Carolina students together for practical, high-energy financial learning: credit building, tax basics, personal budgeting, and real conversations about financial independence.</p>
+                    <div className="sym-kpis">
+                      <div><strong>5</strong><span>Workshops</span></div>
+                      <div><strong>1</strong><span>Keynote</span></div>
+                      <div><strong>200+</strong><span>Seats</span></div>
+                    </div>
+                    <div style={{ marginTop: 26 }}>
+                      <a href="mailto:neil06@unc.edu?subject=Symposium RSVP" className="btn btn-outline-white">RSVP / Learn More</a>
+                    </div>
+                  </div>
+                  <div className="sym-agenda">
+                    <h4>Event Highlights</h4>
+                    <button type="button" className="event-toggle-btn" onClick={() => setShowEventDetails((prev) => !prev)}>
+                      {showEventDetails ? 'Hide Full Agenda' : 'Show Full Agenda'}
+                    </button>
+                    {showEventDetails ? (
+                      <div className="sym-features">
+                        {['Featured speaker: Seth Trimble', 'Credit score and credit-building workshop', 'Student taxes and tax-credit fundamentals', 'Escape room and live credit games', 'Open networking with student leaders'].map(f => (
+                          <div key={f} className="sym-feature">{f}</div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="agenda-collapsed">Agenda collapsed. Re-open to preview workshop tracks and activities.</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -98,7 +149,7 @@ export default function Literacy() {
                   <h3>Finance Your Future Night</h3>
                   <p className="event-sub">A landmark evening of financial empowerment at UNC Chapel Hill.</p>
                 </div>
-                <div className="date-badge">🎉</div>
+                <div className="date-badge">Recap</div>
               </div>
               <div className="event-card-body">
                 <div className="recap-stats">

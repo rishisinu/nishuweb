@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Support.css';
 
 function Reveal({ children, className = '' }) {
@@ -34,7 +33,45 @@ const USE_OF_FUNDS = [
   { pct: '~10%', label: 'Financial Literacy Programs & Community Events', color: 'green' },
 ];
 
+const DONOR_TIERS = [
+  { id: 'gold', title: 'Gold Donors', tone: 'gold', donors: ['Carolina Pitch Festival', 'Landson Robbins'] },
+  { id: 'silver', title: 'Silver Donors', tone: 'silver', donors: ['Shiva Rajbhandari', 'The 1789 Fund', 'Jamil Kadoura'] },
+  { id: 'community', title: 'Bronze & Community', tone: 'green', donors: ['Amy Gao', 'Anvi Pullalarevu', 'NextGame Advisors', 'Spicy Nine Chapel Hill', 'Your Name Here'] },
+];
+
+const SPONSORS_SCROLL = [
+  'Blaze Credit Union',
+  'Wasatch Peaks Credit Union',
+  'Carolina Pitch Festival',
+  'Landson Robbins',
+  'Shiva Rajbhandari',
+  'The 1789 Fund',
+  'Jamil Kadoura',
+  'NextGame Advisors',
+  'Spicy Nine Chapel Hill',
+  'Calie Justus',
+  'Charles Zhang',
+  'Saatvik Yamala',
+];
+
+function SponsorsTicker({ items }) {
+  const loop = [...items, ...items];
+  return (
+    <div className="sponsors-ticker" role="region" aria-label="Sponsors and donors marquee">
+      <div className="sponsors-track">
+        {loop.map((name, idx) => (
+          <div key={`${name}-${idx}`} className="sponsor-pill">{name}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Support() {
+  const [activeTier, setActiveTier] = useState('all');
+  const visibleTiers = DONOR_TIERS.filter((tier) => activeTier === 'all' || tier.id === activeTier);
+  const donorCount = new Set(DONOR_TIERS.flatMap((tier) => tier.donors).filter((name) => name !== 'Your Name Here')).size;
+
   return (
     <>
       <section className="page-hero">
@@ -101,73 +138,127 @@ export default function Support() {
               <div className="cta-card">
                 <h3>GoFundMe</h3>
                 <p>Make a one-time donation of any size through our active GoFundMe campaign.</p>
-                <a href="#" className="btn btn-outline-white" id="gofundme-btn">Donate on GoFundMe</a>
+                <a href="https://www.gofundme.com/f/support-carolina-credit-union-for-unc-students" target="_blank" rel="noreferrer" className="btn btn-outline-white" id="gofundme-btn">Donate on GoFundMe</a>
               </div>
             </Reveal>
             <Reveal>
               <div className="cta-card dark">
                 <h3>Tax-Deductible Fundraiser</h3>
                 <p>Your contribution may be tax-deductible. See our official fundraiser page for details.</p>
-                <a href="#" className="btn btn-outline-white" id="taxdeductible-btn">Official Fundraiser</a>
+                <a href="https://secure.givelively.org/donate/cu-de-novo-collective/shiva-rajbhandari" target="_blank" rel="noreferrer" className="btn btn-outline-white" id="taxdeductible-btn">Official Fundraiser</a>
               </div>
             </Reveal>
             <Reveal>
               <div className="card pledge-card" id="pledge">
-                <div className="pledge-icon">📋</div>
+                <div className="pledge-icon">PF</div>
                 <h3>Pledge Form</h3>
                 <p>Commit to a future contribution with our official pledge form. Great for organizations and larger donors.</p>
-                <a href="mailto:neil06@unc.edu?subject=CSCU Pledge Interest" className="btn btn-primary" id="pledge-btn">Request Pledge Form</a>
+                <a href="https://forms.gle/UCGbVQ2NoLJLL935A" target="_blank" rel="noreferrer" className="btn btn-primary" id="pledge-btn">Open Pledge Form</a>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
+      {/* Sponsors */}
+      <section className="section-sm" id="sponsors">
+        <div className="container">
+          <Reveal><div className="text-center mb-24">
+            <span className="section-label">Sponsors & Partners</span>
+            <h2>Organizations and Donors Powering CSCU</h2>
+            <p style={{ maxWidth: 620, margin: '12px auto 0' }}>This list reflects top sponsors and active donor support from our previous campaign site.</p>
+          </div></Reveal>
+          <Reveal>
+            <SponsorsTicker items={SPONSORS_SCROLL} />
+          </Reveal>
+        </div>
+      </section>
+
       {/* Donors Wall */}
       <section className="section bg-offwhite" id="donors">
         <div className="container">
-          <Reveal><div className="text-center mb-48">
+          <Reveal><div className="text-center mb-32">
             <span className="section-label">Our Supporters</span>
             <h2>Donors Wall</h2>
-            <p style={{ maxWidth: 540, margin: '12px auto 0' }}>We are grateful to everyone who has supported our mission. Thank you.</p>
+            <p style={{ maxWidth: 620, margin: '12px auto 0' }}>Backers on this wall are funding the launch of student-owned banking at Carolina. Join them and put your name behind the movement.</p>
           </div></Reveal>
 
-          <Reveal>
-            <div className="donor-tier">
-              <h4 className="tier-title gold">🥇 Gold Sponsors</h4>
-              <div className="donor-list">
-                <div className="donor-chip gold">Carolina Pitch Festival</div>
+          <div className="donor-wall-shell">
+            <Reveal>
+              <div className="donor-proof">
+                <div className="proof-chip">
+                  <strong>{donorCount}+</strong>
+                  <span>Named donors</span>
+                </div>
+                <div className="proof-chip">
+                  <strong>{DONOR_TIERS.length}</strong>
+                  <span>Donor tiers</span>
+                </div>
+                <div className="proof-chip">
+                  <strong>$500k</strong>
+                  <span>Launch target</span>
+                </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
 
-          <Reveal>
-            <div className="donor-tier">
-              <h4 className="tier-title silver">🥈 Silver Sponsors</h4>
-              <div className="donor-list">
-                <div className="donor-chip">Shiva Rajbhandari</div>
-                <div className="donor-chip">1789 Fund</div>
+            <Reveal>
+              <div className="tier-filter" role="tablist" aria-label="Filter donor tiers">
+                <button
+                  type="button"
+                  role="tab"
+                  className={activeTier === 'all' ? 'active' : ''}
+                  aria-selected={activeTier === 'all'}
+                  onClick={() => setActiveTier('all')}
+                >
+                  All Tiers
+                </button>
+                {DONOR_TIERS.map((tier) => (
+                  <button
+                    key={tier.id}
+                    type="button"
+                    role="tab"
+                    className={activeTier === tier.id ? 'active' : ''}
+                    aria-selected={activeTier === tier.id}
+                    onClick={() => setActiveTier(tier.id)}
+                  >
+                    {tier.title}
+                  </button>
+                ))}
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
 
-          <Reveal>
-            <div className="donor-tier">
-              <h4 className="tier-title green">💚 Community Supporters</h4>
-              <div className="donor-list">
-                <div className="donor-chip">Individual Donors</div>
-                <div className="donor-chip">UNC Student Supporters</div>
-                <div className="donor-chip your-name">Your Name Here</div>
+            {visibleTiers.map((tier) => (
+              <Reveal key={tier.id}>
+                <div className={`donor-tier tier-card ${tier.tone}`}>
+                  <h4 className={`tier-title ${tier.tone}`}>{tier.title}</h4>
+                  <div className="donor-list">
+                    {tier.donors.map((donor) => (
+                      <div
+                        key={donor}
+                        className={`donor-chip ${tier.tone === 'gold' && donor === 'Carolina Pitch Festival' ? 'gold' : ''} ${donor === 'Your Name Here' ? 'your-name' : ''}`}
+                      >
+                        {donor}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+
+            <Reveal>
+              <div className="donor-cta">
+                <div>
+                  <p className="donor-cta-kicker">Next Name On The Wall</p>
+                  <h3>Become a Founding Supporter of Student Banking at UNC</h3>
+                  <p>Your contribution directly moves this from idea to institution. Add your name and help open Carolina’s student-led credit union.</p>
+                </div>
+                <div className="donor-cta-actions">
+                  <a href="#donate" className="btn btn-primary">Donate Now</a>
+                  <a href="https://forms.gle/UCGbVQ2NoLJLL935A" target="_blank" rel="noreferrer" className="btn btn-outline">Pledge A Gift</a>
+                </div>
               </div>
-            </div>
-          </Reveal>
-
-          <Reveal>
-            <div className="text-center" style={{ marginTop: 32 }}>
-              <p style={{ color: 'var(--grey-mid)', fontSize: '0.9rem', marginBottom: 16 }}>Want to see your name on this wall? Make a contribution today.</p>
-              <a href="#donate" className="btn btn-primary">Donate Now</a>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -175,13 +266,22 @@ export default function Support() {
       <section className="section-sm" id="merch">
         <div className="container">
           <Reveal>
-            <div className="merch-card">
-              <div className="merch-icon">👕</div>
-              <h3>Interested In CSCU Merch?</h3>
-              <p>Rock the Carolina Students' Credit Union brand. Contact our Development Head to get exclusive CSCU merchandise.</p>
-              <a href="mailto:cjjustus@unc.edu?subject=CSCU Merch Inquiry" className="btn btn-outline" id="merch-btn">
-                Contact Calie Justus — cjjustus@unc.edu
-              </a>
+            <div className="merch-card merch-feature">
+              <div className="merch-feature-copy">
+                <span className="section-label">Limited Drop</span>
+                <h3>Wear the Carolina Credit Union Initiative</h3>
+                <p>We partner with a local boutique on premium CSCU merch. Place an order directly with our Development team to reserve the next run.</p>
+                <div className="merch-actions">
+                  <a href="mailto:cjjustus@unc.edu?subject=CSCU Merchandise Order" className="btn btn-primary" id="merch-btn">Order Merch</a>
+                  <a href="mailto:cjjustus@unc.edu?subject=CSCU Merchandise Catalog Request" className="btn btn-outline">Request Catalog</a>
+                </div>
+                <p className="merch-contact">Primary contact: Calie Justus (<a href="mailto:cjjustus@unc.edu">cjjustus@unc.edu</a>)</p>
+              </div>
+              <div className="merch-gallery" aria-label="Merchandise preview">
+                <div className="merch-tile">Classic Crewneck</div>
+                <div className="merch-tile">Campus Tee</div>
+                <div className="merch-tile">Founder Hat</div>
+              </div>
             </div>
           </Reveal>
         </div>
